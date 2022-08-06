@@ -24,5 +24,17 @@ namespace WishList.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Items.Add(item);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(item);
+        }
     }
 }
